@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
+
+    {% if title %}
+        <title>Flask Blog - {{ title }}</title>
+    {% else %}
+        <title>Flask Blog</title>
+    {% endif %}
+    <style>
+        body {
+          background-image:url('/static/image1.jpeg');
+          background-color: #cccccc;
+          height: 665px;
+          background-position: center; 
+          background-repeat: no-repeat; 
+          background-size: cover; 
+        }
+        .ftext{
+            text-align: center;
+            position: absolute;
+            top: 20%;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            color:black;
+        }
+        .container .btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            background-color: #f1f1f1;
+            color: black;
+            font-size: 16px;
+            padding: 16px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            }
+
+            .container .btn:hover {
+            background-color: black;
+            color: white;
+            }
+    </style>
+</head>
+<body>
+        <div class="ftext">
+            <h1 style="font-size:50px">Blogger's Stop</h1>
+            <h3>Flask Application</h3>
+        </div> 
+        <div class="container">
+            <button class="btn"><a href="{{url_for('home')}}">FLASK BLOG</a></button>
+        </div>
+</body>
+</html>
