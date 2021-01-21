@@ -1,0 +1,15 @@
+{% extends "layout2.html" %}
+{% block content %}
+    <h1>Users</h1>
+    {% for item in values %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2">{{ item.username }}<br/></a>
+              <p style='background-color:rgb(252, 251, 250)'>Username: {{item.username}}<br/>Email: {{item.email}}</p>
+              <button class="button button1"><a href="{{url_for('admin_delete_user', user_id=item.id)}}">Delete</a></button>
+            </div>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

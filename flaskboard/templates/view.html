@@ -1,0 +1,6 @@
+{% extends "layout2.html" %}
+{% block content %}
+    {% for item in values %}
+        <p style='background-color:rgb(252, 251, 250)'>User ID: {{item.id}}<br/>Username: {{item.username}}<br/>Email: {{item.email}}<br/></p>
+    {% endfor %}
+{% endblock content %}

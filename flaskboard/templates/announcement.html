@@ -1,12 +1,13 @@
-{% extends "layout.html" %}
+{% extends "layout2.html" %}
 {% block content %}
     {% for announcement in announcements.items %}
         <article class="media content-section">
           <div class="media-body">
-            <div class="article-metadata">
+            <!--<div class="article-metadata">
                 <small class="text-muted">{{ announcement.date_posted.strftime('%Y-%m-%d') }}</small>
             </div>
-            <h2><a class="article-title" href="{{ url_for('announcement', announcement_id=announcement.id) }}">{{ announcement.title }}</a></h2>
+            <h2><a class="article-title" href="{{ url_for('announcement', announcement_id=announcement.id) }}">{{ announcement.title }}</a></h2>-->
+            <p class="article-title">{{ announcement.title }}</p>
             <p class="article-content">{{ announcement.content }}</p>
           </div>
         </article>

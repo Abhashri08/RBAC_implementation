@@ -4,7 +4,7 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from flaskboard import app, db, bcrypt
 from flaskboard.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, AnnouncementForm
-from flaskboard.models import User, Post, Announcement
+from flaskboard.models import User, Post#, Announcement
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -167,6 +167,7 @@ def user_posts(username):
 
 
 @app.route("/admin_home")
+@login_required
 def admin_home():
     posts = Post.query.order_by(Post.date_posted.desc())
     return render_template('admin_home.html', title='Admin',posts=posts)
@@ -214,20 +215,21 @@ def latest():
     post = Post.query.order_by(Post.date_posted.desc()).first()    
     return render_template('latest.html', post=post)
 
-@app.route("/announcement")
-def announcement():   
-    announcements = Announcement.query.order_by(Announcement.date_posted.desc())
-    return render_template('announcement.html', announcements=announcements)
-
-@app.route("/annoucement/new", methods=['GET', 'POST'])
+@app.route("/view")
 @login_required
-def new_announcement():
-    form = AnnouncementForm()
-    if form.validate_on_submit():
-        announcement = Announcement(title=form.title.data, content=form.content.data, author=current_user)
-        db.session.add(announcement)
-        db.session.commit()
-        flash('Your announcement has been created!', 'success')
-        return redirect(url_for('admin_home'))
-    return render_template('create_announcement.html', title='New Announcement',
-                           form=form, legend='New Announcement')
+def view():
+    return render_template("view.html",values=User.query.all())
+
+@app.route("/user/delete")
+@login_required
+def delete():
+    return render_template("delete.html",values=User.query.all())
+
+@app.route("/user/delete/<int:user_id>", methods=['GET','POST'])
+@login_required
+def admin_delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    flash('Admin has deleted the User!', 'success')
+    return redirect(url_for('logout'))
